@@ -30,11 +30,17 @@ function Login() {
     })
       .then((res) => {
         if (res.status === 201) {
-          history.replace(DASHBOARD_PATH);
+          return res.json();
         } else if ([400, 404].includes(res.status)) {
           setLoading(false);
           setCredentialError(true);
         }
+      })
+      .then((res) => {
+        sessionStorage.setItem("user_token", res.token);
+        setTimeout(() => {
+          history.replace(DASHBOARD_PATH);
+        }, 300);
       })
       .catch((err) => {
         console.log(err);
