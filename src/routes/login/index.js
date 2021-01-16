@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Button, Message } from "semantic-ui-react";
-import { Container } from "./_loginStyle";
-import { LOGIN_API, DASHBOARD_PATH } from "../../constant";
+import { Form, Button, Message, Divider } from "semantic-ui-react";
+import { Container, DoesntHaveAccount } from "./_loginStyle";
+import { LOGIN_API, DASHBOARD_PATH, REGISTRATION_PATH } from "../../constant";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -48,6 +48,10 @@ function Login() {
       });
   };
 
+  const handleRegisterClick = () => {
+    history.push(REGISTRATION_PATH);
+  };
+
   return (
     <Container>
       <h2>Please Login!</h2>
@@ -79,6 +83,11 @@ function Login() {
           fluid
           secondary
         />
+        <Divider />
+        <DoesntHaveAccount>
+          Doesn't have an account yet? Register your company{" "}
+          <span onClick={handleRegisterClick}>here</span>
+        </DoesntHaveAccount>
       </Form>
     </Container>
   );

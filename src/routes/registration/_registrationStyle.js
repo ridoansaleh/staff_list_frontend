@@ -2,21 +2,19 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  padding-top: 40px;
+  padding-bottom: 40px;
 
-  > form,
+  > h2,
+  form,
   div {
     width: 300px;
   }
-`;
 
-export const DoesntHaveAccount = styled.div`
-  text-align: center;
-  span {
-    color: blue;
-    cursor: pointer;
+  button[type="submit"] {
+    margin-top: 30px;
+    margin-bottom: 15px;
   }
 `;
