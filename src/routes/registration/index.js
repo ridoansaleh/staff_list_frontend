@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Button, Message } from "semantic-ui-react";
+import { Form, Button, Message, Divider } from "semantic-ui-react";
 import { Container } from "./_registrationStyle";
 import { REGISTRATION_API } from "../../constant";
 
@@ -15,6 +15,7 @@ function Registration() {
   const [password, setPassword] = useState("");
   const [isFormSubmitted, setFormSubmitted] = useState(false);
   const [isSubmissionSucceed, setSubmissionSucceed] = useState(false);
+  const [isUsernameExist, setUsernameExist] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
   const history = useHistory();
@@ -62,8 +63,13 @@ function Registration() {
             setUsername("");
             setPassword("");
             setFormSubmitted(false);
+            setUsernameExist(false);
             return res.json();
+          } else if (res.status === 400) {
+            setUsernameExist(true);
+            setSubmissionSucceed(false);
           } else {
+            setUsernameExist(false);
             setSubmissionSucceed(false);
           }
         })
@@ -82,6 +88,7 @@ function Registration() {
   return (
     <Container>
       <h2>Company Details</h2>
+      <Divider />
       <Form onSubmit={handleSubmission}>
         <Form.Input
           label="Company Name"
@@ -141,11 +148,12 @@ function Registration() {
           onChange={(e) => setPassword(e.target.value)}
           error={isFormSubmitted && !password}
         />
-        <Message
-          error
-          header=""
-          content="Your username or password is invalid"
-        />
+        {isUsernameExist && (
+          <Message negative>
+            <Message.Header>Username already taken</Message.Header>
+            <p>Please use an unique username for your admin!</p>
+          </Message>
+        )}
         {isSubmissionSucceed && (
           <Message positive>
             <Message.Header>Successfully Registered</Message.Header>

@@ -37,6 +37,7 @@ function Login() {
         }
       })
       .then((res) => {
+        sessionStorage.setItem("company_id", res.company_id);
         sessionStorage.setItem("user_token", res.token);
         setTimeout(() => {
           history.replace(DASHBOARD_PATH);
