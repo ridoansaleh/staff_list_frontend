@@ -60,9 +60,17 @@ function Staff() {
   }, []);
 
   useEffect(() => {
+    return () => {
+      sessionStorage.removeItem("staff_id");
+      sessionStorage.removeItem("active_staff");
+    };
+  }, []);
+
+  useEffect(() => {
     if (isSubmissionSucceed) {
       setTimeout(() => {
         sessionStorage.removeItem("staff_id");
+        sessionStorage.removeItem("active_staff");
         setSubmissionSucceed(false);
         history.push(DASHBOARD_PATH);
       }, 3000);
@@ -178,11 +186,13 @@ function Staff() {
           <label>Marital Status</label>
           <Button
             content="Single"
+            type="button"
             primary={maritalStatus === "Single"}
             onClick={() => setMaritalStatus("Single")}
           />
           <Button
             content="Married"
+            type="button"
             primary={maritalStatus === "Married"}
             onClick={() => setMaritalStatus("Married")}
           />
@@ -233,8 +243,8 @@ function Staff() {
         />
         <Form.Select
           label="Employee Status"
-          value={employeeStatus}
           options={EMPLOYEE_STATUS}
+          value={employeeStatus}
           placeholder="Employee Status"
           onChange={(_, { value }) => setEmployeeStatus(value)}
           error={isFormSubmitted && !employeeStatus}

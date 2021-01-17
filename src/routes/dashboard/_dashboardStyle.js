@@ -20,7 +20,6 @@ export const Container = styled.div`
   @media only screen and (min-width: 1024px) {
     > section {
       width: 1000px;
-      overflow-x: hidden;
     }
   }
 

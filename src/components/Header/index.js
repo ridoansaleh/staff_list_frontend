@@ -7,7 +7,7 @@ function Header() {
   const history = useHistory();
 
   const handleLogoutClick = () => {
-    sessionStorage.removeItem("user_token");
+    sessionStorage.clear();
     history.replace(LOGIN_PATH);
   };
 
