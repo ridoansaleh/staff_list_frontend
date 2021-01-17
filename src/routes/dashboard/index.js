@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import {
   Table,
@@ -26,7 +26,7 @@ function Dashboard() {
   const token = sessionStorage.getItem("user_token");
   const companyID = sessionStorage.getItem("company_id");
 
-  const getAllStaffs = () => {
+  const getAllStaffs = useCallback(() => {
     fetch(`${ALL_STAFF_API}/${companyID}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -46,11 +46,11 @@ function Dashboard() {
         console.log(err);
         setStaffsFetched(true);
       });
-  };
+  }, [companyID, token]);
 
   useEffect(() => {
     getAllStaffs();
-  }, []);
+  }, [getAllStaffs]);
 
   const handleAddStaffClick = () => {
     history.push(STAFF_PATH);

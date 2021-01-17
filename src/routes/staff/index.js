@@ -57,7 +57,7 @@ function Staff() {
       setPosition(parsedStaff.position);
       setEmployeeStatus(parsedStaff.employee_status);
     }
-  }, []);
+  }, [activeStaff]);
 
   useEffect(() => {
     return () => {
@@ -75,7 +75,7 @@ function Staff() {
         history.push(DASHBOARD_PATH);
       }, 3000);
     }
-  }, [isSubmissionSucceed]);
+  }, [history, isSubmissionSucceed]);
 
   const handleSubmission = (e) => {
     e.preventDefault();
