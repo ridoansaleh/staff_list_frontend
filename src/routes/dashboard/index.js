@@ -14,9 +14,10 @@ function Dashboard() {
   const history = useHistory();
 
   const token = sessionStorage.getItem("user_token");
+  const companyID = sessionStorage.getItem("company_id");
 
   const getAllStaffs = () => {
-    fetch(ALL_STAFF_API, {
+    fetch(`${ALL_STAFF_API}/${companyID}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -44,8 +45,12 @@ function Dashboard() {
     history.push(STAFF_PATH);
   };
 
-  const handleEditClick = () => {
-    history.push(STAFF_PATH);
+  const handleEditClick = (staff) => {
+    sessionStorage.setItem("staff_id", staff._id);
+    sessionStorage.setItem("active_staff", JSON.stringify(staff));
+    setTimeout(() => {
+      history.push(STAFF_PATH);
+    }, 500);
   };
 
   const handleDeleteClick = (staff) => {
@@ -120,7 +125,7 @@ function Dashboard() {
                 <Table.Cell>{staff.position}</Table.Cell>
                 <Table.Cell>{staff.employee_status}</Table.Cell>
                 <Table.Cell>
-                  <Button primary onClick={() => handleEditClick()}>
+                  <Button primary onClick={() => handleEditClick(staff)}>
                     Edit
                   </Button>
                 </Table.Cell>
