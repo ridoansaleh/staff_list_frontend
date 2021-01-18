@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Message, Divider } from "semantic-ui-react";
+import { Helmet } from "react-helmet";
 import { Container, DoesntHaveAccount } from "./_loginStyle";
 import { LOGIN_API, DASHBOARD_PATH, REGISTRATION_PATH } from "../../constant";
 
@@ -39,6 +40,7 @@ function Login() {
       .then((res) => {
         sessionStorage.setItem("company_id", res.company_id);
         sessionStorage.setItem("user_token", res.token);
+        sessionStorage.setItem("company_name", res.company_name);
         setTimeout(() => {
           history.replace(DASHBOARD_PATH);
         }, 300);
@@ -55,6 +57,9 @@ function Login() {
 
   return (
     <Container>
+      <Helmet>
+        <title>Staff List | Login</title>
+      </Helmet>
       <h2>Please Login!</h2>
       <Form onSubmit={handleSubmission} error={isCredentialError}>
         <Form.Input

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Message, Divider } from "semantic-ui-react";
+import { Helmet } from "react-helmet";
 import Header from "../../components/Header";
 import { Container } from "./_staffStyle";
 import { DASHBOARD_PATH, STAFF_API } from "../../constant";
@@ -41,6 +42,7 @@ function Staff() {
   const staffID = sessionStorage.getItem("staff_id");
   const activeStaff = sessionStorage.getItem("active_staff");
   const companyID = sessionStorage.getItem("company_id");
+  const companyName = sessionStorage.getItem("company_name") || "Company Name";
 
   useEffect(() => {
     if (activeStaff) {
@@ -146,7 +148,12 @@ function Staff() {
 
   return (
     <Container>
-      <Header />
+      <Helmet>
+        <title>
+          Staff List | {staffID ? "Edit Existing" : "Add New"} Staff
+        </title>
+      </Helmet>
+      <Header companyName={companyName} />
       <h2>{staffID ? "Edit Existing" : "Add New"} Staff</h2>
       <Divider />
       <Form onSubmit={handleSubmission}>
