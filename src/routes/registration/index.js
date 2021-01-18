@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Message, Divider } from "semantic-ui-react";
+import { Helmet } from "react-helmet";
 import { Container } from "./_registrationStyle";
 import { REGISTRATION_API } from "../../constant";
 
@@ -87,6 +88,9 @@ function Registration() {
 
   return (
     <Container>
+      <Helmet>
+        <title>Staff List | Registration</title>
+      </Helmet>
       <h2>Company Details</h2>
       <Divider />
       <Form onSubmit={handleSubmission}>

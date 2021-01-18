@@ -9,6 +9,7 @@ import {
   Icon,
   Segment,
 } from "semantic-ui-react";
+import { Helmet } from "react-helmet";
 import { format } from "date-fns";
 import PageHeader from "../../components/Header";
 import { Container, AddWrapper } from "./_dashboardStyle";
@@ -25,6 +26,7 @@ function Dashboard() {
 
   const token = sessionStorage.getItem("user_token");
   const companyID = sessionStorage.getItem("company_id");
+  const companyName = sessionStorage.getItem("company_name") || "Company Name";
 
   const getAllStaffs = useCallback(() => {
     fetch(`${ALL_STAFF_API}/${companyID}`, {
@@ -103,7 +105,10 @@ function Dashboard() {
 
   return (
     <Container>
-      <PageHeader />
+      <Helmet>
+        <title>Staff List | {companyName}</title>
+      </Helmet>
+      <PageHeader companyName={companyName} />
       <AddWrapper>
         <Button primary onClick={handleAddStaffClick}>
           Add a new Staff

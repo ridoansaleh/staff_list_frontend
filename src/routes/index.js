@@ -22,10 +22,12 @@ const app_routes = [
   {
     path: DASHBOARD_PATH,
     component: Dashboard,
+    auth: true,
   },
   {
     path: STAFF_PATH,
     component: Staff,
+    auth: true,
   },
 ];
 
