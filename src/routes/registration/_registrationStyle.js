@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 40px;
   padding-bottom: 40px;
 
   > h2 {
@@ -12,9 +11,12 @@ export const Container = styled.div`
   }
 
   > h2,
-  form,
-  div {
+  form {
     width: 300px;
+  }
+
+  section {
+    margin-top: 40px;
   }
 
   button[type="submit"] {

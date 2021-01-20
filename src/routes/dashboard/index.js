@@ -108,7 +108,7 @@ function Dashboard() {
       <Helmet>
         <title>Staff List | {companyName}</title>
       </Helmet>
-      <PageHeader companyName={companyName} />
+      <PageHeader companyName={companyName} isLogin={true} />
       <AddWrapper>
         <Button primary onClick={handleAddStaffClick}>
           Add a new Staff

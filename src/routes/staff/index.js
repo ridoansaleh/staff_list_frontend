@@ -153,7 +153,7 @@ function Staff() {
           Staff List | {staffID ? "Edit Existing" : "Add New"} Staff
         </title>
       </Helmet>
-      <Header companyName={companyName} />
+      <Header companyName={companyName} isLogin={true} />
       <h2>{staffID ? "Edit Existing" : "Add New"} Staff</h2>
       <Divider />
       <Form onSubmit={handleSubmission}>
